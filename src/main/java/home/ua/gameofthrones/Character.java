@@ -8,9 +8,17 @@ public class Character {
 
     private String name;
     private String gender;
-
+    private String[] allegiances;
     public String getName() {
         return name;
+    }
+
+    public String[] getAllegiances() {
+        return allegiances;
+    }
+
+    public void setAllegiances(String[] allegiances) {
+        this.allegiances = allegiances;
     }
 
     public void setName(String name) {

@@ -18,14 +18,14 @@ public class GameOfThronesApplication {
     public static void main(String[] args) {
         SpringApplication.run(GameOfThronesApplication.class, args);
 
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLHostnameVerifier(new NoopHostnameVerifier())
-                .build();
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setHttpClient(httpClient);
-        RestTemplate restTemplate = new RestTemplate(requestFactory);
-        Object result = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/583", Character.class);
-        log.info(result.toString());
+//        CloseableHttpClient httpClient = HttpClients.custom()
+//                .setSSLHostnameVerifier(new NoopHostnameVerifier())
+//                .build();
+//        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+//        requestFactory.setHttpClient(httpClient);
+//        RestTemplate restTemplate = new RestTemplate(requestFactory);
+//        Object result = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/583", Character.class);
+//        log.info(result.toString());
 
   /*  RestTemplate restTemplate = new RestTemplate();
     Character quote = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/583", Character.class);
