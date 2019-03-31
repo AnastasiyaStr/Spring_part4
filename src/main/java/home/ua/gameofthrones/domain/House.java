@@ -1,4 +1,4 @@
-package home.ua.gameofthrones.entity;
+package home.ua.gameofthrones.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

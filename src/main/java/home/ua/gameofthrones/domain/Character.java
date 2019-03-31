@@ -1,4 +1,4 @@
-package home.ua.gameofthrones;
+package home.ua.gameofthrones.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -9,6 +9,11 @@ public class Character {
     private String name;
     private String gender;
     private String[] allegiances;
+
+    ////////////////////////
+    private String House;
+    private Character character;
+    /////////////////////////
     public String getName() {
         return name;
     }
