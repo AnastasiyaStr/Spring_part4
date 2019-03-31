@@ -1,6 +1,7 @@
 package home.ua.gameofthrones.service;
 
 import home.ua.gameofthrones.domain.Character;
+import home.ua.gameofthrones.domain.House;
 import home.ua.gameofthrones.entity.CharacterEntity;
 import home.ua.gameofthrones.repository.CharacterRepository;
 import home.ua.gameofthrones.utils.ObjectMapperUtils;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import java.util.Random;
+
 @Service
 public class CharacterService {
   @Autowired
@@ -18,16 +21,25 @@ public class CharacterService {
     @Autowired
     private ObjectMapperUtils modelMapper;
     public int save(String character){
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLHostnameVerifier(new NoopHostnameVerifier())
-                .build();
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setHttpClient(httpClient);
-        RestTemplate restTemplate = new RestTemplate(requestFactory);
-        Object[] result = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/?name="+character, Character[].class);
-        Character characterDTO  = (Character) result[0];
-        String[] allegiances = characterDTO.getAllegiances();
-        characterRepository.save(modelMapper.map(characterDTO, CharacterEntity.class));
+            CloseableHttpClient httpClient = HttpClients.custom()
+                    .setSSLHostnameVerifier(new NoopHostnameVerifier())
+                    .build();
+            HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+            requestFactory.setHttpClient(httpClient);
+            RestTemplate restTemplate = new RestTemplate(requestFactory);
+            Object[] result = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/?name="+character, Character[].class);
+            Character characterDTO  = (Character) result[0];
+            String[] allegiances = characterDTO.getAllegiances();
+            House houseDTO =  restTemplate.getForObject(allegiances[0], House.class);
+            String[]sworn =  houseDTO.getSwornMembers();
+            Random random = new Random();
+            Character foundCharacter = restTemplate.getForObject(sworn[random.nextInt(sworn.length)], Character.class);
+            while(foundCharacter.getDied()!=""){
+                foundCharacter = restTemplate.getForObject(sworn[random.nextInt(sworn.length)], Character.class);
+            }
+            characterDTO.set
+            System.out.println("Found Character: "+foundCharacter);
+            characterRepository.save(modelMapper.map(characterDTO, CharacterEntity.class));
       return 1;
 
     }
