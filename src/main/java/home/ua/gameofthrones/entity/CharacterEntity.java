@@ -11,10 +11,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "charact")
-public class CharacterEntity /*extends BaseEntity*/{
+public class CharacterEntity extends BaseEntity{
 
-    @Id
-    private Long id;
+    @Column(name = "url")
+    private String url;
     @Column(name = "name")
     private String name;
     @Column(name = "gender")
@@ -25,4 +25,6 @@ public class CharacterEntity /*extends BaseEntity*/{
     private String character;
     @Column(name = "_characterID")
     private String characterID;
+    @Column(name = "relationship")
+    private String relationship;
 }

@@ -40,19 +40,34 @@ public class CharacterService {
             while(foundCharacter.getDied()!=""){
                 foundCharacter = restTemplate.getForObject(sworn[random.nextInt(sworn.length)], Character.class);
             }
-            characterDTO.setId(Long.parseLong(urls[size-1]));
+          //  characterDTO.setId(Long.parseLong(urls[size-1]));
             characterDTO.setHouse(houseDTO.getName());
             System.out.println("Found Character: "+foundCharacter);
+
             characterDTO.setCharacter(foundCharacter.getName());
             urls = foundCharacter.getUrl().split("/");
             System.out.println("id of found :" +urls[size-1]);
             characterDTO.setCharacterID(Long.parseLong(urls[size-1]));
+      // if(!foundCharacter.getUrl().equals("")) {
+           if (foundCharacter.getUrl().equals(characterDTO.getFather())) {
+               characterDTO.setRelationship("father of");
+           }
+           if (foundCharacter.getUrl().equals(characterDTO.getMother())) {
+               characterDTO.setRelationship("mother of");
+           }
+           if (foundCharacter.getUrl().equals(characterDTO.getSpouse())) {
+               characterDTO.setRelationship("spouse of");
+           }
+      // }
+       if(characterDTO.getRelationship()==null){
+           characterDTO.setRelationship("either way acquainted with");
+       }
             characterRepository.save(modelMapper.map(characterDTO, CharacterEntity.class));
             return 1;
 
     }
 
-    public int save1(String character){
+    /*public int save1(String character){
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLHostnameVerifier(new NoopHostnameVerifier())
                 .build();
@@ -82,7 +97,7 @@ public class CharacterService {
         characterRepository.save(modelMapper.map(characterDTO, CharacterEntity.class));
         return 1;
 
-    }
+    }*/
 
 
 

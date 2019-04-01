@@ -8,17 +8,21 @@ import java.util.Arrays;
 @Getter@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Character {
-    private Long id;
+    //private Long id;
     private String url;
     private String name;
     private String gender;
     private String[] allegiances;
     private String died;
+    private String father;
+    private String mother;
+    private String spouse;
     ////////////////////////
     private String House;
     private String character;
     /////////////////////////
     private Long characterID;
+    private String relationship;
     public String getName() {
         return name;
     }
