@@ -29,6 +29,9 @@ public class CharacterService {
             RestTemplate restTemplate = new RestTemplate(requestFactory);
             Object[] result = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/?name="+character, Character[].class);
             Character characterDTO  = (Character) result[0];
+            String[]urls = characterDTO.getUrl().split("/");
+            int size = urls.length;
+            System.out.println("id:" +urls[size-1]);
             String[] allegiances = characterDTO.getAllegiances();
             House houseDTO =  restTemplate.getForObject(allegiances[0], House.class);
             String[]sworn =  houseDTO.getSwornMembers();
@@ -37,13 +40,49 @@ public class CharacterService {
             while(foundCharacter.getDied()!=""){
                 foundCharacter = restTemplate.getForObject(sworn[random.nextInt(sworn.length)], Character.class);
             }
-            characterDTO.set
+            characterDTO.setId(Long.parseLong(urls[size-1]));
+            characterDTO.setHouse(houseDTO.getName());
             System.out.println("Found Character: "+foundCharacter);
+            characterDTO.setCharacter(foundCharacter.getName());
+            urls = foundCharacter.getUrl().split("/");
+            System.out.println("id of found :" +urls[size-1]);
+            characterDTO.setCharacterID(Long.parseLong(urls[size-1]));
             characterRepository.save(modelMapper.map(characterDTO, CharacterEntity.class));
-      return 1;
+            return 1;
 
     }
 
+    public int save1(String character){
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setSSLHostnameVerifier(new NoopHostnameVerifier())
+                .build();
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setHttpClient(httpClient);
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+        Object[] result = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/?name="+character, Character[].class);
+        Character characterDTO  = (Character) result[0];
+        String[]urls = characterDTO.getUrl().split("/");
+        int size = urls.length;
+        System.out.println("id:" +urls[size-1]);
+        String[] allegiances = characterDTO.getAllegiances();
+        House houseDTO =  restTemplate.getForObject(allegiances[0], House.class);
+        String[]sworn =  houseDTO.getSwornMembers();
+        Random random = new Random();
+        Character foundCharacter = restTemplate.getForObject(sworn[random.nextInt(sworn.length)], Character.class);
+        while(foundCharacter.getDied()!=""){
+            foundCharacter = restTemplate.getForObject(sworn[random.nextInt(sworn.length)], Character.class);
+        }
+        characterDTO.setId(Long.parseLong(urls[size-1]));
+        characterDTO.setHouse(houseDTO.getName());
+        System.out.println("Found Character: "+foundCharacter);
+        characterDTO.setCharacter(foundCharacter.getName());
+        urls = foundCharacter.getUrl().split("/");
+        System.out.println("id of found :" +urls[size-1]);
+        characterDTO.setCharacterID(Long.parseLong(urls[size-1]));
+        characterRepository.save(modelMapper.map(characterDTO, CharacterEntity.class));
+        return 1;
+
+    }
 
 
 

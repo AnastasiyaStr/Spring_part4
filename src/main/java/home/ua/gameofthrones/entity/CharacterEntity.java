@@ -4,22 +4,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-
 @Entity
-@Table(name = "category")
-public class CharacterEntity extends BaseEntity{
+@Table(name = "charact")
+public class CharacterEntity /*extends BaseEntity*/{
 
+    @Id
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "gender")
     private String gender;
-    @Column(name = "allegiances")
-    private String[] allegiances;
+    @Column(name = "house")
+    private String house;
+    @Column(name = "_character")
+    private String character;
+    @Column(name = "_characterID")
+    private String characterID;
 }
