@@ -1,33 +1,37 @@
 package home.ua.gameofthrones.controller;
 
-import home.ua.gameofthrones.domain.Character;
-import home.ua.gameofthrones.domain.House;
-import home.ua.gameofthrones.service.CharacterService;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import home.ua.gameofthrones.service.Impl.CharacterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("characters")
 public class CharacterController {
 @Autowired
-CharacterService characterService;
-    @GetMapping("{characterName}")
-    public ResponseEntity<?> findCharacterByName1(@PathVariable("characterName") String name) {
-            characterService.save(name);
+CharacterServiceImpl characterServiceImpl;
 
-
-            return new ResponseEntity<>(HttpStatus.CREATED);
+    @GetMapping("hello")//Add validation!!!!
+    public ResponseEntity<?> returnHello() {
+        return new ResponseEntity<>("Hello world!!!",HttpStatus.CREATED);
     }
 
+
+    @GetMapping("{characterName}")//Add validation!!!!
+    public ResponseEntity<?> findCharacterByName1(@PathVariable("characterName")@NotNull String name) {
+            characterServiceImpl.collectDataAndSaveIntoDatabase(name);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    @GetMapping//Add validation!!!!
+    public ResponseEntity<?> findCharacters() {
+        return new ResponseEntity<>( characterServiceImpl.findAll(), HttpStatus.OK);
+
+    }
   /*  @GetMapping("{characterName}")
     public ResponseEntity<?> findCharacterByName(@PathVariable("characterName") String name) {
 
@@ -51,7 +55,7 @@ CharacterService characterService;
 
     @GetMapping("page") // /users/page?page=0&size=20&sort=
     public ResponseEntity<?> getUsersByPage(@PageableDefault Pageable pageable) {
-        return new ResponseEntity<>(characterService.getUsersByPage(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(characterServiceImpl.getUsersByPage(pageable), HttpStatus.OK);
     }
 
 }

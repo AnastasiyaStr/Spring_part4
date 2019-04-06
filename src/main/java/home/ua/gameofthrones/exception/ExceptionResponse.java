@@ -1,4 +1,4 @@
-package home.ua.gameofthrones.domain.exception;
+package home.ua.gameofthrones.exception;
 
 import lombok.Getter;
 

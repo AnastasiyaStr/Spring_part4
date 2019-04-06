@@ -3,7 +3,7 @@
 //import home.ua.gameofthrones.domain.Character;
 //import home.ua.gameofthrones.entity.CharacterEntity;
 //import home.ua.gameofthrones.repository.CharacterRepository;
-//import home.ua.gameofthrones.service.CharacterService;
+//import home.ua.gameofthrones.service.Impl.CharacterService;
 //
 //import home.ua.gameofthrones.utils.ObjectMapperUtils;
 //import org.junit.Before;
@@ -64,3 +64,5 @@
 //    }
 //    // write test cases here
 //}
+
+

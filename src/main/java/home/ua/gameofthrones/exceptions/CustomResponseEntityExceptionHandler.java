@@ -1,6 +1,6 @@
 package home.ua.gameofthrones.exceptions;
 
-import home.ua.gameofthrones.domain.exception.ExceptionResponse;
+import home.ua.gameofthrones.exception.ExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,4 +15,7 @@ public class CustomResponseEntityExceptionHandler {
                 req.getDescription(false));
         return new ResponseEntity<>(exResponse, HttpStatus.CONFLICT);
     }
+
+    ///Not found Exception
+    //об звязок
 }

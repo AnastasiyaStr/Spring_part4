@@ -19,14 +19,15 @@ public class GameOfThronesApplicationTests {
 
     @Autowired
     private CharacterRepository characterRepository;
-   /* @Test
-    public void contextLoads() {
-    }*/
-@Test
+
+    /* @Test
+     public void contextLoads() {
+     }*/
+    @Test
     public void EmployeeRepositoryIntegrationTest() {
 // given
-       CharacterEntity alex = new CharacterEntity();
-       alex.setName("Alex");
+        CharacterEntity alex = new CharacterEntity();
+        alex.setName("Alex");
         entityManager.persist(alex);
         entityManager.flush();
 

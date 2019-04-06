@@ -8,7 +8,7 @@ import java.util.Arrays;
 @Getter@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Character {
-    //private Long id;
+    private Long id;
     private String url;
     private String name;
     private String gender;

@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+//не Autowired
 @Component
 public class ObjectMapperUtils {
 
@@ -25,12 +25,12 @@ public class ObjectMapperUtils {
 
     private ObjectMapperUtils() {
     }
-
-    public <D, T> D map(final T entity, Class<D> outClass) {
+//static
+   static public <D, T> D map(final T entity, Class<D> outClass) {
         return modelMapper.map(entity, outClass);
     }
 
-    public <D, T> List<D> mapAll(final Collection<T> entityList, Class<D> outCLass) {
+   static public <D, T> List<D> mapAll(final Collection<T> entityList, Class<D> outCLass) {
         return entityList.stream().map(entity -> map(entity, outCLass)).collect(Collectors.toList());
     }
 
