@@ -7,11 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest
 @DataJpaTest
 public class CharacterRepositoryTest {
     @Autowired
@@ -21,18 +19,13 @@ public class CharacterRepositoryTest {
     private CharacterRepository characterRepository;
 
     @Test
-    public void EmployeeRepositoryIntegrationTest() {
-        // given
+    public void CharacterRepositoryIntegrationTest() {
         CharacterEntity alex = new CharacterEntity();
         alex.setId(1L);
         alex.setName("Alex");
         entityManager.persist(alex);
         entityManager.flush();
-
-        // when
         CharacterEntity found = characterRepository.getByName(alex.getName());
-
-        // then
         assert (found.getName()).equals(alex.getName());
     }
 }

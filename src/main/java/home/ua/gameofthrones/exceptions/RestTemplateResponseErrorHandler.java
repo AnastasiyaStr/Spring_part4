@@ -29,11 +29,11 @@ public class RestTemplateResponseErrorHandler
 
         if (httpResponse.getStatusCode()
                 .series() == HttpStatus.Series.SERVER_ERROR) {
-            throw new AlreadyExistsException("HEL");
+
         } else if (httpResponse.getStatusCode()
                 .series() == HttpStatus.Series.CLIENT_ERROR) {
             if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
-                throw new AlreadyExistsException("HEL");
+
             }
         }
     }

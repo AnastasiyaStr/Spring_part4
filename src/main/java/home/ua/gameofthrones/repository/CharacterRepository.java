@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<CharacterEntity, Long> {
-    boolean existsByName(String name);
     CharacterEntity getByName(String name);
     CharacterEntity  getById(Long id);
     List<CharacterEntity> findAll();

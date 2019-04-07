@@ -17,47 +17,10 @@ public class Character {
     private String father;
     private String mother;
     private String spouse;
-    ////////////////////////
     private String House;
     private String character;
-    /////////////////////////
     private Long characterID;
     private String relationship;
-    public String getName() {
-        return name;
-    }
-
-    public String[] getAllegiances() {
-        return allegiances;
-    }
-
-    public String getHouse() {
-        return House;
-    }
-
-    public String getCharacter() {
-        return character;
-    }
-
-    public void setAllegiances(String[] allegiances) {
-        this.allegiances = allegiances;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getDied() {
-        return died;
-    }
 
     @Override
     public String toString() {

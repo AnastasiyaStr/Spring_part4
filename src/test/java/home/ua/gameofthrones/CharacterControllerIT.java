@@ -33,8 +33,8 @@ public class CharacterControllerIT {
 
     @Mock
     CharacterService characterService;
-    @InjectMocks
-    CharacterServiceImpl characterServiceImpl;
+   /* @InjectMocks
+    CharacterServiceImpl characterServiceImpl;*/
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders
@@ -42,56 +42,40 @@ public class CharacterControllerIT {
                 .build();
     }
     @Test
-    public void contexLoads() throws Exception {
+    public void contextLoads(){
         assertNotNull(controller);
     }
 
     @Test
-    public void givenGameUriWhenMockMvcThenGetStatus() throws Exception {
+    public void givenCharacterControllerWhenPostThenGetCreatedStatus() throws Exception {
         mockMvc.perform(post("/characters/{characterName}", "Jon Snow"))
                 .andExpect(status().isCreated());
     }
 
     @Test
-    public void givenGreetUriThenMockMvcThenGetContentType() throws Exception {
+    public void givenCharacterControllerWhenPostThenGetContentTypeJSON() throws Exception {
         mockMvc.perform(post("/characters/{characterName}", "Jon Snow"));
         mockMvc.perform(get("/characters"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"));
     }
 
     @Test
-    public void givenGreetURIWhenMockMvcThenGetJson() throws Exception {
+    public void givenCharacterControllerWhenPostThenGetContentTypeJSONWithEnteredName() throws Exception {
         mockMvc.perform(post("/characters/{characterName}", "Jon Snow"));
         mockMvc.perform(get("/characters"))
                 .andExpect(jsonPath("$.content[0].name").value("Jon Snow"));
     }
     @Test
-    public void givenGreetURIWhenMockMvcThenGetJson1() throws Exception {
-        mockMvc.perform(post("/characters/{characterId}", 271)).andExpect(status().isNotFound());;
-       /* mockMvc.perform(get("/characters"))
-                .andExpect(jsonPath("$.content[0].name").value("Jon Snow"));*/
+    public void givenCharacterControllerWhenEnterNotStoredNumberThenExpectNotFoundStatus() throws Exception {
+        mockMvc.perform(post("/characters/{characterId}", 271)).andExpect(status().isNotFound());
+
     }
 
     @Test
-    public void testFindTheGreatestFromAllData() throws Exception {
+    public void whenGetNotFoundExceptionThenNotFoundStatusIsReturned() throws Exception {
         when(characterService.collectDataAndSaveIntoDatabase("Name")).thenThrow(new NotFoundException("No such element"));
             mockMvc.perform(post("/characters/{characterName}", "Name")).andExpect(status().isNotFound());
-
     }
-
-    @Test
-    public void givenGreetURIWhenMockMvcThenGetJson8() throws Exception {
-        mockMvc.perform(get("/characters/{characterId}", 271)).andExpect(status().isNotFound());
-       /* mockMvc.perform(get("/characters"))
-                .andExpect(jsonPath("$.content[0].name").value("Jon Snow"));*/
-    }
-   /* @Test
-    public void testFindTheGreatestFromAllData1() throws Exception {
-        //when(characterService.collectDataAndSaveIntoDatabase("Name")).thenThrow(new NotFoundException("No such element"));
-        mockMvc.perform(post("/characters/{characterName}"," ")).andExpect(status().isNotFound());
-
-    }*/
-
 
 }
 

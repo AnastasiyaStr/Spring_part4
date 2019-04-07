@@ -43,7 +43,6 @@ public class CharacterServiceTest {
         character.setCharacter("Ygritte");
         character.setRelationship("fellow");
         character.setHouse("Winterfell");
-        //given(characterRepository.getById(271L)).willReturn(character);
         characterRepository.save(character);
         Assert.assertEquals("Character"+character.getName()+"(id: "+character.getId()+") has a " +character.getRelationship()
                 +" "+character.getCharacter() +"(who is not dead yet) with id( "+character.getCharacterID()+" ) from house: "+character.getHouse(), characterService.returnCharacterAndFellowInfoById(271L));

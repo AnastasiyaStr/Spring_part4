@@ -16,28 +16,16 @@ public class CustomResponseEntityExceptionHandler {
         return new ResponseEntity<>(exResponse, HttpStatus.CONFLICT);
     }
 
-   /* @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<?> handleNotFoundException(BadRequestException e, WebRequest req){
-        ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(), req.getDescription(false));
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
-    }*/
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> handleNotFoundException(Exception e, WebRequest req){
+    public ResponseEntity<?> handleNotFoundException(Exception e, WebRequest req) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
-  /*  @ExceptionHandler(ArrayIndexOutOfBoundsException.class)
-    public ResponseEntity<?> handleArrayIndexOutOfBoundsException(BadRequestException e, WebRequest req){
-        ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(), req.getDescription(false));
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
-    }*/
-    ///Not found Exception
-    //об звязок
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> handleIllegalArgumentException(Exception e, WebRequest req){
+    public ResponseEntity<?> handleIllegalArgumentException(Exception e, WebRequest req) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }

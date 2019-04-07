@@ -1,30 +1,19 @@
 package home.ua.gameofthrones.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 
+@Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class House {
 
     private String name;
     private String[] swornMembers;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String[] getSwornMembers() {
-        return swornMembers;
-    }
-
-    public void setSwornMembers(String[] swornMembers) {
-        this.swornMembers = swornMembers;
-    }
 
     @Override
     public String toString() {
