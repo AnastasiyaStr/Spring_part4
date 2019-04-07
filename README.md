@@ -1,6 +1,6 @@
 # Spring_part4
 This is a simple Microservice Application
-  App uses Third Party API of Ice and Fire to find fellows of entered
+  App which uses Third Party API of Ice and Fire to find fellows of entered
   characters of the same house who are not dead.Yet.
  
   How to get specified data:
