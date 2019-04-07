@@ -5,6 +5,7 @@ import home.ua.gameofthrones.domain.House;
 import home.ua.gameofthrones.entity.CharacterEntity;
 import home.ua.gameofthrones.entity.HouseEntity;
 import home.ua.gameofthrones.exceptions.AlreadyExistsException;
+import home.ua.gameofthrones.exceptions.NotFoundException;
 import home.ua.gameofthrones.repository.CharacterRepository;
 import home.ua.gameofthrones.repository.HouseRepository;
 import home.ua.gameofthrones.service.CharacterService;
@@ -132,7 +133,9 @@ public class CharacterServiceImpl implements CharacterService {
 //        }
 
         //description
-       CharacterEntity characterEntity = characterRepository.save(ObjectMapperUtils.map(fellowAliveService.callThirdPartyAPI(character), CharacterEntity.class));//пов ен
+        Character characterFound = fellowAliveService.callThirdPartyAPI(character);
+        if(characterFound==null)throw new NotFoundException("Specified character not found!!!");
+       CharacterEntity characterEntity = characterRepository.save(ObjectMapperUtils.map(characterFound, CharacterEntity.class));//пов ен
        return characterEntity.getId();
         //retun UUID!!!!!
 
@@ -188,10 +191,13 @@ public List<Character> findAll(){
 }
 
     public Character callThirdPartyAPI(String character){
-        Character[] result = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/?name=" + character, Character[].class);
 
 
-        Character characterDTO = result[0];
+            Character[] result = restTemplate.getForObject("https://anapioficeandfire.com/api/characters/?name=" + character, Character[].class);
+
+
+            Character characterDTO = result[0];
+
 
 
         String[] allegiances = characterDTO.getAllegiances();
@@ -233,5 +239,13 @@ public List<Character> findAll(){
             characterDTO.setRelationship("either way acquainted with");
         }
          return characterDTO;
+    }
+
+    @Override
+    public String returnCharacterAndFellowInfoById(Long id) {
+        CharacterEntity characterEntity = characterRepository.getById(id);
+        if(characterEntity == null) throw new NotFoundException("No character with such id!!!");
+        return "Character"+characterEntity.getName()+"(id: "+characterEntity.getId()+") has a " +characterEntity.getRelationship()
+                +" "+characterEntity.getCharacter() +"(who is not dead yet) with id( "+characterEntity.getCharacterID()+" ) from house: "+characterEntity.getHouse();
     }
 }

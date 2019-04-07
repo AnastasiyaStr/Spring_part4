@@ -1,5 +1,7 @@
 package home.ua.gameofthrones.service;
 
 public interface CharacterService {
-   public  Long collectDataAndSaveIntoDatabase(String character);
+
+    Long collectDataAndSaveIntoDatabase(String character);
+    String returnCharacterAndFellowInfoById(Long id);
 }

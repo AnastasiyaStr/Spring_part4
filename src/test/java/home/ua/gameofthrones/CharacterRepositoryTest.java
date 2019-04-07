@@ -13,20 +13,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 //@SpringBootTest
 @DataJpaTest
-public class GameOfThronesApplicationTests {
+public class CharacterRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
     private CharacterRepository characterRepository;
 
-    /* @Test
-     public void contextLoads() {
-     }*/
     @Test
     public void EmployeeRepositoryIntegrationTest() {
-// given
+        // given
         CharacterEntity alex = new CharacterEntity();
+        alex.setId(1L);
         alex.setName("Alex");
         entityManager.persist(alex);
         entityManager.flush();

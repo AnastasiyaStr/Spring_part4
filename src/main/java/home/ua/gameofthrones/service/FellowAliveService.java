@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 
 public interface FellowAliveService {
-
-    public Character callThirdPartyAPI(String character);
+     Long parseIdFromUrl(String url);
+     Character callThirdPartyAPI(String character);
+     String findRelationship(Character enteredCharacter, Character foundCharacter);
 }
